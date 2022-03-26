@@ -4,7 +4,7 @@
 // Make the code compile and the tests pass!
 // If you have issues execute `rustlings hint structs3`
 
-// I AM NOT DONE
+// I AM DONE
 
 #[derive(Debug)]
 struct Package {
@@ -15,23 +15,20 @@ struct Package {
 
 impl Package {
     fn new(sender_country: String, recipient_country: String, weight_in_grams: i32) -> Package {
-        if weight_in_grams <= 0 {
-            // Something goes here...
-        } else {
-            return Package {
-                sender_country,
-                recipient_country,
-                weight_in_grams,
-            };
-        }
+        assert!(weight_in_grams > 0);
+        return Package {
+            sender_country,
+            recipient_country,
+            weight_in_grams,
+        };
     }
 
-    fn is_international(&self) -> ??? {
-        // Something goes here...
+    fn is_international(&self) -> bool {
+        self.sender_country != self.recipient_country
     }
 
-    fn get_fees(&self, cents_per_gram: i32) -> ??? {
-        // Something goes here...
+    fn get_fees(&self, cents_per_gram: i32) -> i32 {
+        cents_per_gram * self.weight_in_grams
     }
 }
 
@@ -73,7 +70,7 @@ mod tests {
         let sender_country = String::from("Spain");
         let recipient_country = String::from("Spain");
 
-        let cents_per_gram = ???;
+        let cents_per_gram = 3;
 
         let package = Package::new(sender_country, recipient_country, 1500);
 
